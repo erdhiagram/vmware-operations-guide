@@ -16,6 +16,11 @@
 .top-table th:hover {
   border: 1px dashed yellow !important;
 }
-.tob-table a.highlight {
+.top-table a.highlight,
+.top-table a:link {
   color: rgb(102, 102, 102) !important;
+}
+.top-table {
+  margin-left: 2em;
+  padding-right: 2em;
 }
