@@ -6,7 +6,7 @@
     <meta name=generator content="Hugo 0.85.0">
     <meta name=description content>
     <link rel=icon href=/vmware-operations-guide/images/favicon.png type=image/png>
-    <title>exstop :: VMware Operations Guide</title>
+    <title>Horizon :: VMware Operations Guide</title>
     <link href=/vmware-operations-guide/css/clr-ui.min.css?1634458076 rel=stylesheet>
     <link href=/vmware-operations-guide/css/fontawesome-all.min.css?1634458076 rel=stylesheet>
     <link href=/vmware-operations-guide/css/featherlight.min.css?1634458076 rel=stylesheet>
@@ -14,44 +14,21 @@
     <link href=/vmware-operations-guide/css/auto-complete.css?1634458076 rel=stylesheet>
     <link href=/vmware-operations-guide/css/clarity-theme.css?1634458076 rel=stylesheet>
     <link href=/vmware-operations-guide/css/jquery.dataTables.min.css?1634458076 rel=stylesheet>
+    <link href="https://cdn.datatables.net/colvis/1.1.2/css/dataTables.colVis.css" rel=stylesheet>
     <link href=/vmware-operations-guide/css/hugo-theme.css?1634458076 rel=stylesheet>
     <link href=/vmware-operations-guide/css/theme.css?1634458076 rel=stylesheet>
     <link href=/vmware-operations-guide/css/top-table.css?1634458076 rel=stylesheet>
+    <link href="https://phpcoder.tech/multiselect/css/jquery.multiselect.css" rel=stylesheet>
 
     <style>
-        .tab {
-            overflow: hidden;
-            border: 1px solid #ccc;
-            background-color: #f1f1f1;
+        th {
+            border-top: 1px solid #dddddd;
+            border-bottom: 1px solid #dddddd;
+            border-right: 1px solid #dddddd;
         }
 
-        /* Style the buttons that are used to open the tab content */
-        .tab button {
-            background-color: inherit;
-            float: left;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 14px 16px;
-            transition: 0.3s;
-        }
-
-        /* Change background color of buttons on hover */
-        .tab button:hover {
-            background-color: #ddd;
-        }
-
-        /* Create an active/current tablink class */
-        .tab button.active {
-            background-color: #ccc;
-        }
-
-        /* Style the tab content */
-        .tabcontent {
-            display: none;
-            padding: 6px 12px;
-            border: 1px solid #ccc;
-            border-top: none;
+        th:first-child {
+            border-left: 1px solid #dddddd;
         }
     </style>
 
@@ -64,35 +41,8 @@
     }
 
     gtag('js', new Date), gtag('config', 'G-4E70Q7EBYT')</script>
-
-    <script>
-        $(document).ready(function () {
-            document.getElementById("defaultOpen").click();
-        });
-        function openCity(evt, cityName) {
-            // Declare all variables
-            var i, tabcontent, tablinks;
-
-            // Get all elements with class="tabcontent" and hide them
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-
-            // Get all elements with class="tablinks" and remove the class "active"
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-
-            // Show the current tab, and add an "active" class to the button that opened the tab
-            document.getElementById(cityName).style.display = "block";
-            evt.currentTarget.className += " active";
-
-        }
-    </script>
 </head>
-<body data-url=/vmware-operations-guide/demo/toptable/>
+<body data-url=/vmware-operations-guide/demo/datatable/>
 <div class=main-container>
     <header class=header-6>
         <div class=branding><a href=/vmware-operations-guide/ class=nav-link>
@@ -133,162 +83,71 @@
                     <div>
                         <div id=top-bar>
                             <div id=top-github-link><a class=github-link title="Edit this page"
-                                                       href=https://github.com/TheNewStellW/vmware-operations-guide/tree/main/content/Demo/TopTable/_index.md
+                                                       href=https://github.com/TheNewStellW/vmware-operations-guide/tree/main/content/Demo/Datatable/_index.md
                                                        target=blank><i class="fas fa-code-branch"></i>
                                 <span id=top-github-link-text>Edit this page</span></a></div>
                             <div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb><span
                                     id=sidebar-toggle-span><a href=# id=sidebar-toggle data-sidebar-toggle><i
                                     class="fas fa-bars"></i></a></span>
                                 <span class=links><a href=/vmware-operations-guide/>VMware Operations Guide</a> > <a
-                                        href=/vmware-operations-guide/demo/>Demo</a> > esxtop</span></div>
+                                        href=/vmware-operations-guide/demo/>Demo</a> > Horizon</span></div>
                         </div>
                     </div>
                     <div id=head-tags></div>
-                    <div id=body-inner><h1>esxtop</h1>
-                        <div>
-                            esxtop is suitable for troubleshooting especially when you already know the target ESXi Host and specific VM. It's not designed for overall monitoring of a multi clusters environment with many datastores and networks.<br><br>
-                            This documentation is not about how to use exstop. There are plenty of materials on that already. Our goal here is to explain the metrics, what thresholds are good, and how to use them together.<br><br>
-                            The  7 tabs below maps to the 7 panes in actual exstop console. Within each panel, esxtop groups the metrics as they do not fit into the console. We will follow the grouping for familiarity. In actual troubleshooting, you may use metrics from different groups.<br><br>
-                            Click on a metric you want to learn more. It will open a new tab so you can keep this tab as the home page.
-                        </div>
-
-                        <!-- Tab links -->
-                        <div class="tab">
-                            <button class="tablinks" onclick="openCity(event, 'CPU')" id="defaultOpen">CPU</button>
-                            <button class="tablinks" onclick="openCity(event, 'Memory')">Memory</button>
-                            <button class="tablinks" onclick="openCity(event, 'Disk')">Disk</button>
-                            <button class="tablinks" onclick="openCity(event, 'vSAN')">vSAN</button>
-                            <button class="tablinks" onclick="openCity(event, 'Network')">Network</button>
-                            <button class="tablinks" onclick="openCity(event, 'Power')">Power</button>
-                            <button class="tablinks" onclick="openCity(event, 'Interrupt')">Interrupt</button>
-                        </div>
-
-                        <!-- Tab content -->
-                        <div id="CPU" class="tabcontent">
-                            <div class=top-table>
-                                <table>
-                                    <thead>
-                                    <tr>
-                                        <th style=text-align:left>PID</th>
-                                        <th style=text-align:left><a target="_blank" href=/vmware-operations-guide/metrics/>Metrics</a></th>
-                                        <th style=text-align:right>%CPU TIME</th>
-                                        <th style=text-align:right>#TH</th>
-                                        <th style=text-align:right>#WQ</th>
-                                        <th style=text-align:center>#PORT</th>
-                                        <th style=text-align:left>MEM</th>
-                                        <th style=text-align:left>PURG</th>
-                                        <th style=text-align:left>CMPRS</th>
-                                        <th style=text-align:left>PGRP</th>
-                                        <th style=text-align:left>PPID</th>
-                                        <th style=text-align:left>STATE</th>
-                                        <th style=text-align:left>BOOSTS</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td style=text-align:left>155</td>
-                                        <td style=text-align:left>WindowServer</td>
-                                        <td style=text-align:right>16.7</td>
-                                        <td style=text-align:right>08:20:31</td>
-                                        <td style=text-align:right>17</td>
-                                        <td style=text-align:center>7</td>
-                                        <td style=text-align:left>4116-</td>
-                                        <td style=text-align:left>891M-</td>
-                                        <td style=text-align:left>6336K+</td>
-                                        <td style=text-align:left>143M</td>
-                                        <td style=text-align:left>155</td>
-                                        <td style=text-align:left>1</td>
-                                        <td style=text-align:left>sleeping</td>
-                                    </tr>
-                                    <tr>
-                                        <td style=text-align:left>74648</td>
-                                        <td style=text-align:left>vmware-remot</td>
-                                        <td style=text-align:right>1.0</td>
-                                        <td style=text-align:right>00:58.77</td>
-                                        <td style=text-align:right>46</td>
-                                        <td style=text-align:center>2</td>
-                                        <td style=text-align:left>330</td>
-                                        <td style=text-align:left>92M</td>
-                                        <td style=text-align:left>5376K</td>
-                                        <td style=text-align:left>0B</td>
-                                        <td style=text-align:left>74614</td>
-                                        <td style=text-align:left>74614</td>
-                                        <td style=text-align:left>sleeping</td>
-                                    </tr>
-                                    <tr>
-                                        <td style=text-align:left>155</td>
-                                        <td style=text-align:left>WindowServer</td>
-                                        <td style=text-align:right>16.7</td>
-                                        <td style=text-align:right>08:20:31</td>
-                                        <td style=text-align:right>17</td>
-                                        <td style=text-align:center>7</td>
-                                        <td style=text-align:left>4116-</td>
-                                        <td style=text-align:left>891M-</td>
-                                        <td style=text-align:left>6336K+</td>
-                                        <td style=text-align:left>143M</td>
-                                        <td style=text-align:left>155</td>
-                                        <td style=text-align:left>1</td>
-                                        <td style=text-align:left>sleeping</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div>
-                                The CPU panel shows the load average in the last 1 minute, 5 minute and 15 minutes, respectively.<br><br>
-                                The next 3 line covers Used (%), Utilization (%) and Core Utilization (%). The reason why 1 swapped the order in the book is Used (%) is built upon Utilization, and it's a more complex counter.<br><br>
-                                The white vertical line shows where i cut the screenshot, as the text became too small and unreadable if i were to include all of them. Anyway, it's just repeating for each CPU thread.
-                            </div>
-                        </div>
-
-                        <div id="Memory" class="tabcontent">
-                            <h3>Paris</h3>
-                            <p>Paris is the capital of France.</p>
-                        </div>
-
-                        <div id="Disk" class="tabcontent">
-                            <h3>Tokyo</h3>
-                            <p>Tokyo is the capital of Japan.</p>
-                        </div>
-
-                        <div id="VSAN" class="tabcontent">
-                            <h3>Tokyo</h3>
-                            <p>Tokyo is the capital of Japan.</p>
-                        </div>
-
-                        <div id="Network" class="tabcontent">
-                            <h3>Tokyo</h3>
-                            <p>Tokyo is the capital of Japan.</p>
-                        </div>
-
-                        <div id="Power" class="tabcontent">
-                            <h3>Tokyo</h3>
-                            <p>Tokyo is the capital of Japan.</p>
-                        </div>
-
-                        <div id="Interrupt" class="tabcontent">
-                            <h3>Tokyo</h3>
-                            <p>Tokyo is the capital of Japan.</p>
-                        </div>
-
+                    <div id=body-inner><h1>Horizon</h1>
+                        <p>
+                            Here are all the metrics and properties that come with vRealize Operations Management Pack for Horizon (MP4H 2.0).
+                            <br/><br/>
+                            How to use this dynamic table:
+                            <br/>
+                        <ol>
+                            <li>To hide column, do this.</li>
+                            <li>To filter based on specific value of a column do this.</li>
+                            <li>To filter based on any column, use the search box.</li>
+                            <li>Note: no 2 and 3 work together as join filter.</li>
+                            <li>To sort by any column, click on it.</li>
+                            <li>To sort multiple column, press shift then click any column.</li>
+                        </ol>
+                        </p>
+                        <table id=dataTables class=datatable style="min-width: 1000px;">
+                            <thead>
+                            <tr>
+                                <th>Object</th>
+                                <th>Purpose</th>
+                                <th>Type</th>
+                                <th>Metric Group</th>
+                                <th>Name</th>
+                                <th>Unit</th>
+                                <th>Tool tips</th>
+                            </tr>
+                            <tr>
+                                <th class=th_filter></th>
+                                <th class=th_filter></th>
+                                <th class=th_filter></th>
+                                <th class=th_filter></th>
+                                <th class=th_filter></th>
+                                <th class=th_filter></th>
+                                <th class=th_filter></th>
+                            </tr>
+                            </thead>
+                        </table>
                         <div class="navigation-buttons clr-row">
                             <div class="clr-col nav-prev"><a class=nav-prev
-                                                             href=/vmware-operations-guide/demo/datatable/ title=Datatable><i
+                                                             href=/vmware-operations-guide/demo/ title=Demo><i
                                     class="fa fa-chevron-left"></i></a></div>
                             <div class="clr-col nav-next"><a class=nav-next
-                                                             href=/vmware-operations-guide/demo/datatable/ title=Datatable><i
-                                    class="fa fa-chevron-right"></i></a></div>
+                                                             href=/vmware-operations-guide/demo/toptable/ title="Top
+                                                             Table"><i class="fa fa-chevron-right"></i></a></div>
                         </div>
                         <hr>
                         This page was last updated on October 17, 2021 by Vinay Vivekananda
                         with commit message: "enable gh-pages for demo"
                     </div>
                 </div>
-
-                <div id=navigation><a class="nav nav-prev"
-                                      href=/vmware-operations-guide/demo/datatable/ title=Datatable><i
+                <div id=navigation><a class="nav nav-prev" href=/vmware-operations-guide/demo/ title=Demo><i
                         class="fa fa-chevron-left"></i></a>
-                    <a class="nav nav-next" href=/vmware-operations-guide/demo/datatable/ title=Datatable
-                       style=margin-right:0><i class="fa fa-chevron-right"></i></a></div>
+                    <a class="nav nav-next" href=/vmware-operations-guide/demo/toptable/ title="Top Table"
+                    style=margin-right:0><i class="fa fa-chevron-right"></i></a></div>
             </section>
             <div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px>
                 <div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div>
@@ -1444,13 +1303,11 @@
                     <li data-nav-id=/vmware-operations-guide/demo/ title=Demo class="dd-item
 parent"><a href=/vmware-operations-guide/demo/ class=nav-link><i class="fas fa-bug"></i> Demo</a>
                         <ul class=nav-list>
-                            <li data-nav-id=/vmware-operations-guide/demo/datatable/ title=Datatable class=dd-item><a
-                                    href=/vmware-operations-guide/demo/datatable/ class=nav-link>Datatable</a></li>
-                            <li data-nav-id=/vmware-operations-guide/demo/toptable/ title="Top Table
-                            " class="dd-item
+                            <li data-nav-id=/vmware-operations-guide/demo/horizon/ title=Horizon class=dd-item><a
+                                    href=/vmware-operations-guide/demo/horizon/ class="nav-link active">Horizon</a></li>
+                            <li data-nav-id=/vmware-operations-guide/demo/esxtop/ title="Esxtop" class="dd-item
                             parent
-                            active"><a href=/vmware-operations-guide/demo/toptable/ class="nav-link active">Top
-                            Table</a></li></ul>
+                            active"><a href=/vmware-operations-guide/demo/esxtop/ class="nav-link">Esxtop</a></li></ul>
                     </li>
                 </ul>
                 <section id=shortcuts><h3>Links</h3>
@@ -1467,7 +1324,7 @@ parent"><a href=/vmware-operations-guide/demo/ class=nav-link><i class="fas fa-b
                         <li><a class=padding>
                             <div class=clr-select-wrapper><i class="fas fa-language fa-fw"></i>
                                 <select class=clr-select id=select-language onchange="location=this.value">
-                                    <option id=en value=/vmware-operations-guide/demo/toptable/ selected>English
+                                    <option id=en value=/vmware-operations-guide/demo/datatable/ selected>English
                                     </option>
                                 </select></div>
                         </a></li>
@@ -1507,29 +1364,108 @@ parent"><a href=/vmware-operations-guide/demo/ class=nav-link><i class="fas fa-b
 <script src=/vmware-operations-guide/js/learn.js?1634458076></script>
 <script src=/vmware-operations-guide/js/hugo-learn.js?1634458076></script>
 <script src=/vmware-operations-guide/js/jquery.dataTables.min.js?1634458076></script>
+<script src="https://cdn.datatables.net/colvis/1.1.2/js/dataTables.colVis.js"></script>
 <script src=/vmware-operations-guide/js/datatable.js?1634458076></script>
+<script src="https://phpcoder.tech/multiselect/js/jquery.multiselect.js"></script>
 <script type=text/javascript src=/vmware-operations-guide/js/lunr.min.js?1634458076></script>
 <script type=text/javascript src=/vmware-operations-guide/js/auto-complete.js?1634458076></script>
 <script type=text/javascript>var baseurl = "/vmware-operations-guide/"</script>
 <script type=text/javascript src=/vmware-operations-guide/js/search.js?1634458076></script>
 <script src=/vmware-operations-guide/mermaid/mermaid.js?1634458076></script>
 <script>mermaid.initialize({startOnLoad: !0})</script>
-<script>$(document).ready(function () {
-    $('a[href]').click(function () {
-        let a = $(this).attr('href');
-        if (a && a.length > 0 && a.charAt(0) === '#') {
-            a = a.replace(':', '\\:');
-            let b = $(a);
-            if (b && b.length) {
-                let a = b[0].offsetTop;
-                if (a) {
-                    let b = a;
-                    top && $('.content-area').animate({scrollTop: b}, 1e3)
+<script>
+    function viewTable() {
+        $('#dataTables').DataTable().destroy();
+        var dataTable = $('#dataTables').DataTable({
+            responsive: false,
+            processing: true,
+            paging: true,
+            ordering: true,
+            orderCellsTop: true,
+            ajax: '/vmware-operations-guide/files/json/test.json',
+            columns: [
+                { 'data': 'Object' },
+                { 'data': 'Purpose' },
+                { 'data': 'Type' },
+                { 'data': 'Metric Group' },
+                { 'data': 'Name' },
+                { 'data': 'Unit' },
+                { 'data': 'Tool tips' }
+            ],
+            columnDefs: [
+                {
+                    targets: [0,1,2,3,4,5,6],
+                    className: 'dt-body-left'
+                }
+            ],
+            initComplete: function () {
+                this.api().columns().every( function () {
+                    var column = this;
+                    var title = $(this.header()).html().replace(/[\W]/g, '-');
+
+                    var select = $('<select name="' + title + '[]" multiple id="' + title + '"></select>')
+                        .appendTo($("#dataTables thead tr:eq(1) th").eq(column.index()).empty())
+                        .on('change', function () {
+                            var data = $.map($(this).val(), function(value, key) {
+                                return value ? '^' + $.fn.dataTable.util.escapeRegex(value) + '$' : null;
+                            });
+
+                            if (data.length === 0) {
+                                data = [""];
+                            }
+
+                            var val = data.join('|');
+
+                            column
+                                .search( val ? val : '', true, false )
+                                .draw();
+                        });
+
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append( '<option value="'+d+'">'+d+'</option>');
+                    });
+
+                    $('#'+title).multiselect({
+                        columns: 1,
+                        placeholder: 'Search',
+                        search: true,
+                        selectAll: true
+                    });
+                });
+
+                $("#body ul").attr('style', 'margin-left: unset !important');
+                $(".ms-options-wrap > .ms-options > ul label").attr('style', 'padding: 1px 0px 2px 23px !important; font-size: 10px;');
+
+                $("#dataTables").wrap("<div style='overflow:auto; width:100%;'></div>");
+            }
+        });
+
+        $('.th_filter').removeClass('sorting_asc');
+
+        var colvis = new $.fn.dataTable.ColVis( dataTable );
+        $( colvis.button() ).insertAfter('div.dataTables_filter label');
+        $(".ColVis_Button").css({"height":"36px","margin-left":"5px"});
+    }
+
+    $(document).ready(function () {
+        viewTable();
+
+        $('a[href]').click(function () {
+            let a = $(this).attr('href');
+            if (a && a.length > 0 && a.charAt(0) === '#') {
+                a = a.replace(':', '\\:');
+                let b = $(a);
+                if (b && b.length) {
+                    let a = b[0].offsetTop;
+                    if (a) {
+                        let b = a;
+                        top && $('.content-area').animate({scrollTop: b}, 1e3)
+                    }
                 }
             }
-        }
-    })
-})</script>
+        });
+    });
+</script>
 <p style="text-align:center;font-size:.6rem!important;margin:0;padding:.5rem 0;background-color:#f2f2f2">VMware and the
     VMware taglines, logos and product names are trademarks or registered trademarks of VMware in the U.S. and other
     countries.</p></body>
